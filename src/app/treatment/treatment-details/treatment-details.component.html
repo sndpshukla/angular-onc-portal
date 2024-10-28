@@ -1,0 +1,18 @@
+<div class="container mt-4">
+  <h2 class="text-center mb-4">Treatment Details</h2>
+  <div class="card">
+    <div class="card-body" *ngIf="treatment">
+      <h4 class="card-title">
+        {{ treatment.treatmentType }} for {{ treatment.patientName }}
+      </h4>
+      <p><strong>Doctor:</strong> {{ treatment.doctor }}</p>
+      <p><strong>Progress:</strong> {{ treatment.progress }}</p>
+      <p><strong>Start Date:</strong> {{ treatment.startDate }}</p>
+      <p><strong>End Date:</strong> {{ treatment.endDate }}</p>
+      <p><strong>Medications:</strong></p>
+      <ul>
+        <li *ngFor="let med of treatment.medication">{{ med }}</li>
+      </ul>
+    </div>
+  </div>
+</div>

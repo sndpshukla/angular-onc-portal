@@ -1,0 +1,27 @@
+<div class="container mt-4">
+  <h2 class="text-center mb-4">Treatment List</h2>
+  <table class="table table-bordered table-striped">
+    <thead class="thead-dark">
+      <tr>
+        <th>Id</th>
+        <th>Patient Name</th>
+        <th>Treatment Type</th>
+        <th>Start Date</th>
+        <th>End Date</th>
+        <th>Doctor</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let treatment of treatments">
+        <td>
+          <a [routerLink]="['/treatments', treatment.id]" class="text-decoration-none">{{ treatment.id }}</a>
+        </td>
+        <td>{{ treatment.patientName }}</td>
+        <td>{{ treatment.treatmentType }}</td>
+        <td>{{ treatment.startDate }}</td>
+        <td>{{ treatment.endDate }}</td>
+        <td>{{ treatment.doctor }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

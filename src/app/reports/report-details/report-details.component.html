@@ -1,0 +1,15 @@
+<div class="container mt-4">
+  <h2 class="text-center mb-4">Report Details</h2>
+  <div class="card">
+    <div class="card-body" *ngIf="report">
+      <h4 class="card-title">
+        {{ report.reportType }} for {{ report.patientName }}
+      </h4>
+      <p><strong>Generated On:</strong> {{ report.generatedOn }}</p>
+      <p><strong>Status:</strong> {{ report.status }}</p>
+      <p><strong>Doctor:</strong> {{ report.doctor }}</p>
+      <p><strong>Lab Technician:</strong> {{ report.labTechnician }}</p>
+      <p><strong>Findings:</strong> {{ report.findings }}</p>
+    </div>
+  </div>
+</div>

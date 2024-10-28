@@ -1,1 +1,20 @@
 /* You can add global styles to this file, and also import other style files */
+
+/* Importing Bootstrap SCSS file. */
+@import 'bootstrap/dist/css/bootstrap.min.css';
+
+body.bg-light {
+  background-color: #f8f9fa !important;
+}
+
+body.bg-dark {
+  background-color: #343a40 !important;
+}
+
+body.text-dark {
+  color: #212529 !important;
+}
+
+body.text-light {
+  color: #ffffff !important;
+}

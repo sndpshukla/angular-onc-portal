@@ -1,0 +1,29 @@
+<div class="container mt-4">
+  <h2 class="text-center mb-4">Reports List</h2>
+  <table class="table table-bordered table-striped">
+    <thead class="thead-dark">
+      <tr>
+        <th>Id</th>
+        <th>Patient Name</th>
+        <th>Report Type</th>
+        <th>Generated On</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let report of reports">
+        <td>
+          <a
+            [routerLink]="['/reports', report.id]"
+            class="text-decoration-none"
+            >{{ report.id }}</a
+          >
+        </td>
+        <td>{{ report.patientName }}</td>
+        <td>{{ report.reportType }}</td>
+        <td>{{ report.generatedOn }}</td>
+        <td>{{ report.status }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

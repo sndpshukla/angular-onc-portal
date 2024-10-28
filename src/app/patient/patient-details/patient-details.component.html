@@ -1,0 +1,22 @@
+<div class="container mt-4">
+  <h2 class="text-center mb-4">Patient Details</h2>
+  <div class="card">
+    <div class="card-body" *ngIf="patient">
+      <h4 class="card-title">{{ patient.name }} ({{ patient.gender }})</h4>
+      <p><strong>Age:</strong> {{ patient.age }}</p>
+      <p><strong>Diagnosis:</strong> {{ patient.diagnosis }}</p>
+      <p><strong>Contact:</strong> {{ patient.contact }}</p>
+      <p><strong>Address:</strong> {{ patient.address }}</p>
+      <p><strong>Medical History:</strong></p>
+      <ul>
+        <li *ngFor="let history of patient.medicalHistory">{{ history }}</li>
+      </ul>
+      <p>
+        <strong>Emergency Contact:</strong>
+        {{ patient.emergencyContact.name }} ({{
+          patient.emergencyContact.relationship
+        }}), {{ patient.emergencyContact.phone }}
+      </p>
+    </div>
+  </div>
+</div>
