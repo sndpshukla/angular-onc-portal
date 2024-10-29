@@ -1,6 +1,8 @@
 import { NgIf } from '@angular/common';
-import { Component } from '@angular/core';
-import { RouterLink, RouterLinkActive } from '@angular/router';
+import { Component, DestroyRef } from '@angular/core';
+import { Router, RouterLink, RouterLinkActive } from '@angular/router';
+
+import { CommunicationService } from '../shared/service/communication.service';
 
 @Component({
   selector: 'app-header',
@@ -11,13 +13,31 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
 })
 export class HeaderComponent {
   isDarkTheme = false;
+  isLoggedIn = false;
+
+  constructor(
+    private router: Router,
+    private communicationService: CommunicationService,
+    private destroyRef: DestroyRef,
+  ) {
+    const subscription = this.communicationService.loginState$.subscribe((state) => {
+      this.isLoggedIn = state;
+    });
+
+    this.destroyRef.onDestroy(() => {
+      subscription.unsubscribe();
+    });
+  }
 
   toggleTheme(): void {
     this.isDarkTheme = !this.isDarkTheme;
 
-    document.documentElement.setAttribute(
-      'data-bs-theme',
-      this.isDarkTheme ? 'dark' : 'light'
-    );
+    document.documentElement.setAttribute('data-bs-theme', this.isDarkTheme ? 'dark' : 'light');
+  }
+
+  logout(): void {
+    sessionStorage.removeItem('user');
+    this.communicationService.updateLoginState(false);
+    this.router.navigate(['/login']);
   }
 }

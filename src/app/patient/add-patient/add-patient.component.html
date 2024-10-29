@@ -1,34 +1,191 @@
-<div class="container my-4">
+<div class="container mt-4">
+  <h2 class="text-center mb-4">Add Patient</h2>
   <form [formGroup]="patientForm" (ngSubmit)="onSubmit()">
     <div class="mb-3">
+      <label for="id" class="form-label">ID</label>
+      <input
+        type="text"
+        class="form-control"
+        id="id"
+        formControlName="id"
+        [class]="{ 'is-invalid': patientForm.get('id')?.invalid && patientForm.get('id')?.touched }"
+      />
+      <div *ngIf="patientForm.get('id')?.invalid && patientForm.get('id')?.touched" class="invalid-feedback">
+        ID is required.
+      </div>
+    </div>
+
+    <div class="mb-3">
       <label for="name" class="form-label">Name</label>
-      <input type="text" id="name" class="form-control" formControlName="name" />
-      <div *ngIf="patientForm.get('name')?.invalid && patientForm.get('name')?.touched" class="text-danger">
-        Name is required and should be at least 3 characters long.
+      <input
+        type="text"
+        class="form-control"
+        id="name"
+        formControlName="name"
+        [class]="{ 'is-invalid': patientForm.get('name')?.invalid && patientForm.get('name')?.touched }"
+      />
+      <div *ngIf="patientForm.get('name')?.invalid && patientForm.get('name')?.touched" class="invalid-feedback">
+        Name is required and must be at least 2 characters long.
       </div>
     </div>
 
     <div class="mb-3">
       <label for="age" class="form-label">Age</label>
-      <input type="number" id="age" class="form-control" formControlName="age" />
-      <div *ngIf="patientForm.get('age')?.invalid && patientForm.get('age')?.touched" class="text-danger">
+      <input
+        type="number"
+        class="form-control"
+        id="age"
+        formControlName="age"
+        [class]="{ 'is-invalid': patientForm.get('age')?.invalid && patientForm.get('age')?.touched }"
+      />
+      <div *ngIf="patientForm.get('age')?.invalid && patientForm.get('age')?.touched" class="invalid-feedback">
         Age is required and must be a positive number.
       </div>
     </div>
 
     <div class="mb-3">
       <label for="gender" class="form-label">Gender</label>
-      <select id="gender" class="form-select" formControlName="gender">
+      <select class="form-control" id="gender" formControlName="gender">
         <option value="">Select Gender</option>
         <option value="Male">Male</option>
         <option value="Female">Female</option>
         <option value="Other">Other</option>
       </select>
-      <div *ngIf="patientForm.get('gender')?.invalid && patientForm.get('gender')?.touched" class="text-danger">
+      <div *ngIf="patientForm.get('gender')?.invalid && patientForm.get('gender')?.touched" class="invalid-feedback">
         Gender is required.
       </div>
     </div>
 
-    <button type="submit" class="btn btn-primary mt-3" [disabled]="patientForm.invalid">Add Patient</button>
+    <div class="mb-3">
+      <label for="diagnosis" class="form-label">Diagnosis</label>
+      <input
+        type="text"
+        class="form-control"
+        id="diagnosis"
+        formControlName="diagnosis"
+        [class]="{ 'is-invalid': patientForm.get('diagnosis')?.invalid && patientForm.get('diagnosis')?.touched }"
+      />
+      <div
+        *ngIf="patientForm.get('diagnosis')?.invalid && patientForm.get('diagnosis')?.touched"
+        class="invalid-feedback"
+      >
+        Diagnosis is required.
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="contact" class="form-label">Contact</label>
+      <input
+        type="text"
+        class="form-control"
+        id="contact"
+        formControlName="contact"
+        [class]="{ 'is-invalid': patientForm.get('contact')?.invalid && patientForm.get('contact')?.touched }"
+      />
+      <div *ngIf="patientForm.get('contact')?.invalid && patientForm.get('contact')?.touched" class="invalid-feedback">
+        Contact is required and must be a 10-digit number.
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="address" class="form-label">Address</label>
+      <textarea
+        class="form-control"
+        id="address"
+        formControlName="address"
+        [class]="{ 'is-invalid': patientForm.get('address')?.invalid && patientForm.get('address')?.touched }"
+      ></textarea>
+      <div *ngIf="patientForm.get('address')?.invalid && patientForm.get('address')?.touched" class="invalid-feedback">
+        Address is required.
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label" for="patientHistory">Medical History</label>
+      <div formArrayName="medicalHistory">
+        <div *ngFor="let history of medicalHistory.controls; let i = index" class="input-group mb-2">
+          <input
+            type="text"
+            id="patientHistory"
+            class="form-control"
+            [formControlName]="i"
+            [class]="{ 'is-invalid': history.invalid && history.touched }"
+          />
+          <button type="button" class="btn btn-danger" (click)="removeMedicalHistory(i)">Remove</button>
+        </div>
+      </div>
+      <button type="button" class="btn btn-secondary" (click)="addMedicalHistory()">Add Medical History</button>
+    </div>
+
+    <hr />
+
+    <div class="mb-3" formGroupName="emergencyContact">
+      <h5>Emergency Contact</h5>
+      <div class="mb-3">
+        <label for="emergencyName" class="form-label">Name</label>
+        <input
+          type="text"
+          class="form-control"
+          id="emergencyName"
+          formControlName="name"
+          [class]="{
+            'is-invalid':
+              patientForm.get('emergencyContact.name')?.invalid && patientForm.get('emergencyContact.name')?.touched,
+          }"
+        />
+        <div
+          *ngIf="patientForm.get('emergencyContact.name')?.invalid && patientForm.get('emergencyContact.name')?.touched"
+          class="invalid-feedback"
+        >
+          Emergency contact name is required.
+        </div>
+      </div>
+      <div class="mb-3">
+        <label for="relationship" class="form-label">Relationship</label>
+        <input
+          type="text"
+          class="form-control"
+          id="relationship"
+          formControlName="relationship"
+          [class]="{
+            'is-invalid':
+              patientForm.get('emergencyContact.relationship')?.invalid &&
+              patientForm.get('emergencyContact.relationship')?.touched,
+          }"
+        />
+        <div
+          *ngIf="
+            patientForm.get('emergencyContact.relationship')?.invalid &&
+            patientForm.get('emergencyContact.relationship')?.touched
+          "
+          class="invalid-feedback"
+        >
+          Relationship is required.
+        </div>
+      </div>
+      <div class="mb-3">
+        <label for="emergencyPhone" class="form-label">Phone</label>
+        <input
+          type="text"
+          class="form-control"
+          id="emergencyPhone"
+          formControlName="phone"
+          [class]="{
+            'is-invalid':
+              patientForm.get('emergencyContact.phone')?.invalid && patientForm.get('emergencyContact.phone')?.touched,
+          }"
+        />
+        <div
+          *ngIf="
+            patientForm.get('emergencyContact.phone')?.invalid && patientForm.get('emergencyContact.phone')?.touched
+          "
+          class="invalid-feedback"
+        >
+          Emergency contact phone is required and must be a 10-digit number.
+        </div>
+      </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Submit</button>
   </form>
 </div>

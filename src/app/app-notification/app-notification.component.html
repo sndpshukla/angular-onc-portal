@@ -1,5 +1,5 @@
-<div *ngIf="notification" [class]="['alert', 'alert-' + notification.type]" role="alert">
+<div *ngIf="notification" [class]="['alert', 'alert-' + notification!.type]" role="alert">
   <div class="container">
-    {{ notification.message }}
+    {{ notification!.message }}
   </div>
 </div>

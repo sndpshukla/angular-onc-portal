@@ -4,7 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 
 import { Patient } from '../../models/patient';
 import { CommunicationService } from '../../shared/service/communication.service';
-import { MOCK_PATIENTS } from '../data/mock-patient.data';
+import { PatientService } from '../patient.service';
 
 @Component({
   selector: 'app-patient-details',
@@ -20,11 +20,12 @@ export class PatientDetailsComponent implements OnInit {
     private activeRoute: ActivatedRoute,
     private commService: CommunicationService,
     private router: Router,
+    private patientService: PatientService,
   ) {}
 
   ngOnInit() {
     const id = this.activeRoute.snapshot.paramMap.get('id');
-    this.patient = MOCK_PATIENTS.find((patient) => patient.id === id);
+    this.patient = this.patientService.getPatients().find((patient) => patient.id === id);
 
     if (!this.patient) {
       this.commService.sendNotification({

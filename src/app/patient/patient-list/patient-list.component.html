@@ -1,5 +1,8 @@
 <div class="container mt-4">
   <h2 class="text-center mb-4">Patient List</h2>
+  <div class="text-end mb-3">
+    <button *ngIf="isLoggedIn" class="btn btn-primary" [routerLink]="['/patients', 'add']">Add Patient</button>
+  </div>
   <table class="table table-bordered table-striped">
     <thead class="thead-dark">
       <tr>
@@ -14,11 +17,7 @@
     <tbody>
       <tr *ngFor="let patient of patients">
         <td>
-          <a
-            [routerLink]="['/patients', patient.id]"
-            class="text-decoration-none"
-            >{{ patient.id }}</a
-          >
+          <a [routerLink]="['/patients', patient.id]" class="text-decoration-none">{{ patient.id }}</a>
         </td>
         <td>{{ patient.name }}</td>
         <td>{{ patient.age }}</td>

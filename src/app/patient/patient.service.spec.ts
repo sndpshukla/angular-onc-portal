@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { DynamicRouteService } from './dynamic-route.service';
+import { PatientService } from './patient.service';
 
-describe('DynamicRouteService', () => {
-  let service: DynamicRouteService;
+describe('PatientService', () => {
+  let service: PatientService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(DynamicRouteService);
+    service = TestBed.inject(PatientService);
   });
 
   it('should be created', () => {

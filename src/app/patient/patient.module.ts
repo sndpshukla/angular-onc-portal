@@ -4,8 +4,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { AddPatientComponent } from './add-patient/add-patient.component';
 import { PatientDetailsComponent } from './patient-details/patient-details.component';
 import { PatientListComponent } from './patient-list/patient-list.component';
-import { DynamicRouteService } from './services/dynamic-route.service';
 
+// dynamic routes for patients post lazy loaded module is added
 const routes: Routes = [
   { path: '', component: PatientListComponent },
   { path: 'add', component: AddPatientComponent },
@@ -16,8 +16,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class PatientModule {
-  constructor(private dynamicRouting: DynamicRouteService) {
-    this.dynamicRouting.registerAdditionalRoutes();
-  }
-}
+export class PatientModule {}
